@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>home api</title>
+</head>
+<script>
+    fetch("http://localhost:3000/api/preview")
+        .then(async function (response) { return response.text() })
+        .then(function (html) {
+            var parser = new DOMParser()
+            var doc = parser.parseFromString(html, 'text/html')
+            var contenido = doc.querySelector("body").innerHTML;
+            let getJSON = JSON.parse(contenido)
+            var getImg = getJSON.image
+            const contenedor = document.getElementById("banner")
+            contenedor.insertAdjacentHTML("beforebegin", `<img src=${getImg} class="img-fluid rounded-top", style="max-width: 400px; margin: 0 auto;">`)
+            document.getElementById("variant").innerHTML = getJSON.variant
+            document.getElementById("description").innerHTML = getJSON.description
+        })
+        .catch(err => console.log(err)) 
+</script>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center text-center align-items-center">
+            <div class="col-xl-8 col-lg-9 col-md-10 layer-3">
+                <h1 class="display-3">Welcome to Mice API!</h1>
+                <p>Where you can get more info about the domesticated mices!</p>
+                <div class="container d-grid gap-2 d-md-block">
+                    <a class="btn btn-success" href="/api/test" type="button">Try the API 🐁</a>
+                    <button class="btn btn-secondary" type="button">Github 🐱</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="container justify-content-center text-center align-items-center">
+
+            <h2 class="text-center">Preview of the API!</h2>
+            <br>
+            <div class="card" id="banner" style="width: 400px; margin: 0 auto;">
+                <div class="card-body rounded-bottom">
+                    <h5 class="card-title" id="variant"></h5>
+                    <p class="card-text" id="description"></p>
+                </div>
+            </div>
+            <br>
+            <p class="text-center">Made with ♥ and 🐁 by Corgi</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+[
+    {
+        "variant": "Standard",
+        "description": "The standard coat type is short, sleek, and naturally shiny. This variety is also referred to as short hair mice.",
+        "image": "https://petkeen.com/wp-content/uploads/2022/03/mouse-up-close_MainelyPhotos_Shutterstock.webp",
+        "credit": "https://petkeen.com/types-of-pet-mice-varieties/"
+    },
+    {
+        "variant": "Satin",
+        "description": "The satin coat type is fine, dense, soft, with a recognizable glossy shimmer. The coat is short and very silky to the touch.",
+        "image": "https://petkeen.com/wp-content/uploads/2020/11/Mice-Playing-with-Feathers.webp",
+        "credit": "https://petkeen.com/types-of-pet-mice-varieties/"
+    },
+    {
+        "variant": "Long Hair",
+        "description": "Long hair mice have a fine, dense coat that is long and silky. The long hair coat type is essentially the long-haired version of the standard variety.",
+        "image": "https://petkeen.com/wp-content/uploads/2021/12/Long-hair-mouse_otsphoto-Shutterstock.webp",
+        "credit": "https://petkeen.com/types-of-pet-mice-varieties/"
+    },
+    {
+        "variant": "Long Hair Satin",
+        "description": "The long hair satin coat type is the long-haired version of the satin coat type. Long hair satin mice will have a very distinct shimmery, satin sheen on their long, dense coat.",
+        "image": "https://petkeen.com/wp-content/uploads/2021/12/Long-Hair-Satin-mice_Sergey-Bezgodov-Shutterstock.webp",
+        "credit": "https://petkeen.com/types-of-pet-mice-varieties/"
+    },
+    {
+        "variant": "Self Mice",
+        "description": "In the color and coat marking section known as self, the entire mouse's body will be the same uniform color with no additional markings.",
+        "image": "https://petkeen.com/wp-content/uploads/2021/12/two-black-mice_Piqsels.webp",
+        "credit": "https://petkeen.com/types-of-pet-mice-varieties/"
+    }
+]
