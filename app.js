@@ -47,12 +47,17 @@ async function app() {
             const validateApi = await validateAPIKEY(req.query.key, consultK);
             if (validateApi.valid == false) return res.status(validateApi.status).send(validateApi.reason)
             res.send({
-                generatedColor: await generateColorCode(),
+                generatedColor: generateColorCode(),
             })
         } else {
             res.send({ messageType: "Warning", message: "The API KEY is required to use the aplication!", guide: "/api/random-color?key=<YOUR_API_KEY>" })
         }
     })
+    
+    app.get("/api/random-color/preview", async (req, res) => {
+        res.send({ generatedColor: generateColorCode(), })
+    })
+    //#endregion random-color
 
     // Register a new APIKEY
     app.post("/api/register", async (req, res) => {

@@ -8,6 +8,15 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>home api</title>
 </head>
+
+<style>
+    .color:hover {
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+        transition: all;
+        transition-duration: 0.5s;
+    }
+</style>
+
 <script>
     fetch("http://localhost:3000/api/mice/preview")
         .then(async function (response) { return response.text() })
@@ -18,9 +27,20 @@
             let getJSON = JSON.parse(contenido)
             var getImg = getJSON.image
             const contenedor = document.getElementById("banner")
-            contenedor.insertAdjacentHTML("beforebegin", `<img src=${getImg} class="img-fluid rounded-top", style="max-width: 400px; margin: 0 auto;">`)
+            contenedor.insertAdjacentHTML("afterbegin", `<img src=${getImg} class="img-fluid card-img-top", style="width: 600px; overflow: hidden;">`)
             document.getElementById("variant").innerHTML = getJSON.variant
             document.getElementById("description").innerHTML = getJSON.description
+        })
+        .catch(err => console.log(err))
+    fetch("http://localhost:3000/api/random-color/preview")
+        .then(async function (response) { return response.text() })
+        .then(function (html) {
+            var parser = new DOMParser()
+            var doc = parser.parseFromString(html, 'text/html')
+            var contenido = doc.querySelector("body").innerHTML;
+            let getJSON = JSON.parse(contenido)
+            document.getElementById("color").style.backgroundColor = getJSON.generatedColor
+            document.getElementById("code").innerHTML = getJSON.generatedColor
         })
         .catch(err => console.log(err)) 
 </script>
@@ -38,7 +58,7 @@
             </div>
         </div>
         <br>
-        <div class="container justify-content-center text-center align-items-center">
+        <!-- <div class="container justify-content-center text-center align-items-center">
 
             <h2 class="text-center">Preview of the API!</h2>
             <br>
@@ -48,10 +68,38 @@
                     <p class="card-text" id="description"></p>
                 </div>
             </div>
-            <br>
-            <p class="text-center">Made with ♥ and 🐁 by Corgi</p>
+        </div> -->
+    </div>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+            <div class="col">
+                <div class="card" id="banner">
+                    <div class="card-body">
+                        <h5 class="card-title">mice</h5>
+                        <p class="card-text">A little bank of domesticated mice info</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col" style="overflow: hidden;">
+                <div class="card ">
+                    <div class="rounded-top color" id="color" style="height: 240px;">
+                        <div style="height: 100px; line-height: 240px; text-align: center;">
+                            <span
+                                style="color: white; display: inline-block; vertical-align: middle; line-height: normal;">
+                                <h5 id="code"></h5>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">random-color</h5>
+                        <p class="card-text">A little random HEX code generator that it represents a color!</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <br>
+    <p class="text-center">Made with ♥ and 🐁 by Corgi</p>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>

@@ -29,7 +29,7 @@ module.exports = {
     /**
      * @returns A HEX code that it represents a color!
      */
-    async generateColorCode() {
+    generateColorCode() {
         let charMap = 'ABCDEF1234567890';
         var result = "";
         for (let i = 0; i < 6; i++) { result += charMap[Math.floor(Math.random() * charMap.length)] }
