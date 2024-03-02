@@ -9,7 +9,7 @@
     <title>home api</title>
 </head>
 <script>
-    fetch("http://localhost:3000/api/preview")
+    fetch("http://localhost:3000/api/mice/preview")
         .then(async function (response) { return response.text() })
         .then(function (html) {
             var parser = new DOMParser()
@@ -32,8 +32,8 @@
                 <h1 class="display-3">Welcome to Mice API!</h1>
                 <p>Where you can get more info about the domesticated mices!</p>
                 <div class="container d-grid gap-2 d-md-block">
-                    <a class="btn btn-success" href="/api/test" type="button">Try the API 🐁</a>
-                    <button class="btn btn-secondary" type="button">Github 🐱</button>
+                    <a class="btn btn-success" href="/api/mice/test" type="button">Try the API 🐁</a>
+                    <a class="btn btn-secondary" href="https://github.com/Cd-corgi" type="button">Github 🐱</a>
                 </div>
             </div>
         </div>
