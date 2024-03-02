@@ -1,3 +1,6 @@
+const fs = require('fs')
+const path = require('path')
+
 module.exports = {
     /**
      * @returns A little API_KEY that will make you use the app
@@ -34,5 +37,24 @@ module.exports = {
         var result = "";
         for (let i = 0; i < 6; i++) { result += charMap[Math.floor(Math.random() * charMap.length)] }
         return `#${result}`
+    },
+    /**
+     * 
+     * @param {String} path The Router Files Path
+     */
+    async RouterLoader() {
+        const files = await fs.promises.readdir('./src/routes');
+        console.log(files)
+        const routers = [];
+
+        for (const file of files) {
+            // console.log(file)
+            // console.log(file)
+            const filePath = path.join('../routes', file);
+            const router = require(filePath);
+            routers.push(router);
+        }
+
+        return routers;
     }
 }
