@@ -44,12 +44,9 @@ module.exports = {
      */
     async RouterLoader() {
         const files = await fs.promises.readdir('./src/routes');
-        console.log(files)
         const routers = [];
 
         for (const file of files) {
-            // console.log(file)
-            // console.log(file)
             const filePath = path.join('../routes', file);
             const router = require(filePath);
             routers.push(router);
