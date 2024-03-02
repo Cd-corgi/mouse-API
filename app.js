@@ -1,9 +1,8 @@
 const express = require('express');
-// const { GenerateAPI } = require('./src/utils/functions');
-// const getK = require('./src/models/keys')
 const config = require('./src/config/config.json');
 const { RouterLoader } = require('./src/utils/functions');
-// const data = require('./src/config/data.json')
+
+require('dotenv').config()
 require('./src/utils/mongoose')()
 
 async function ss() {
