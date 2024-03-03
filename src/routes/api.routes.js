@@ -2,6 +2,7 @@ const express = require('express');
 const router2 = express.Router();
 const getK = require('../models/keys')
 const data = require('../config/data.json')
+const fs = require('fs')
 const { validateAPIKEY, generateColorCode } = require('../utils/functions');
 
 const example = data;
@@ -54,5 +55,28 @@ router2.get("/api/random-color/preview", async (req, res) => {
     res.send({ generatedColor: generateColorCode(), })
 })
 //#endregion random-color
+
+//#region coinFlipper
+router2.get("/api/coin-flipper", async (req, res) => {
+    if (req.query.key) {
+        var consultK = await getK.find({})
+        const validateApi = await validateAPIKEY(req.query.key, consultK);
+        if (validateApi.valid == false) return res.status(validateApi.status).send(validateApi.reason)
+        var getImageSide = ["./src/media/coin1.png", "./src/media/coin2.png"];
+        var getCoin = getImageSide[Math.floor(Math.random() * getImageSide.length)]
+        res.writeHead(200, { 'Content-Type': 'image/png' });
+        fs.createReadStream(getCoin).pipe(res)
+    } else {
+        res.send({ messageType: "Warning", message: "The API KEY is required to use the aplication!", guide: "/api/coin-flipper?key=<YOUR_API_KEY>" })
+    }
+})
+
+router2.get("/api/coin-flipper/preview", async (req, res) => {
+    var getImageSide = ["./src/media/coin1.png", "./src/media/coin2.png"];
+    var getCoin = getImageSide[Math.floor(Math.random() * getImageSide.length)]
+    res.writeHead(200, { 'Content-Type': 'image/png' });
+    fs.createReadStream(getCoin).pipe(res)
+})
+//#endregion counFlipper
 
 module.exports = router2
