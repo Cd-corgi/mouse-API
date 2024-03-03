@@ -28,5 +28,17 @@
         "description": "In the color and coat marking section known as self, the entire mouse's body will be the same uniform color with no additional markings.",
         "image": "https://petkeen.com/wp-content/uploads/2021/12/two-black-mice_Piqsels.webp",
         "credit": "https://petkeen.com/types-of-pet-mice-varieties/"
+    },
+    {
+        "variant": "Swiss Webster Mouse",
+        "description": "This stock resulted from the selective inbreeding by Dr. Leslie Webster using foundation animals from a large colony of Swiss mice maintained at Rockefeller Institute following importation from Switzerland in 1926. To Carworth Farms from Rockefeller Institute. Highly inbred at the time they were acquired by Carworth. This line was reduced to a single pair and progeny outbred from that point forward to form a new stock. To Charles River in 1974 from a representative cross section of the Carworth CFW colony.",
+        "image": "https://www.criver.com/sites/default/files/2017-11/B6_Albino_Mouse_417x235_0.jpg",
+        "credit": "https://www.criver.com/products-services/find-model/swiss-webster-cfw-mouse?region=3616"
+    },
+    {
+        "variant": "Himalayan field Mouse",
+        "description": "The Himalayan field mouse (Apodemus gurkha) is a species of rodent in the family Muridae. It is endemic to Nepal.",
+        "image": "https://thenationalmouseclub.co.uk/wp-content/uploads/2019/03/Himalayan-large.jpg",
+        "credit": "https://thenationalmouseclub.co.uk/project/himalayan/"
     }
 ]
