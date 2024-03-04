@@ -35,15 +35,35 @@
             document.getElementById("color").style.backgroundColor = getJSON.generatedColor
             document.getElementById("code").innerHTML = getJSON.generatedColor
         })
-        .catch(err => console.log(err)) 
+        .catch(err => console.log(err))
     fetch("https://mouse-api-dev-pqse.3.us-1.fl0.io/api/coin-flipper/preview")
-    .then((res) => res.blob())
-    .then(blob => {
-        const image = URL.createObjectURL(blob)
+        .then((res) => res.blob())
+        .then(blob => {
+            const image = URL.createObjectURL(blob)
 
-        const contener = document.getElementById("contener")
-        contener.insertAdjacentHTML('afterbegin', `<img src="${image}" class="img-fluid card-img-top container" style="max-width: 300px">`)
-    })
+            const contener = document.getElementById("contener")
+            contener.insertAdjacentHTML('afterbegin', `<hr>\n<img src="${image}" class="img-fluid card-img-top container" style="max-width: 300px">`)
+        })
+
+    function getKey() {
+        const getClasses = document.getElementById("getKey")
+        getClasses.setAttribute("disabled", true)
+        const outPutStatus = document.getElementById("output");
+        outPutStatus.insertAdjacentHTML('afterbegin', `<h3>Output:</h3>\n<p><code class="coder mention" id="cons">Generating KEY...</code></p>`)
+        setTimeout(async () => {
+            getClasses.removeAttribute("disabled")
+            var getConsole = document.getElementById("cons")
+            const getCode = await generateCode()
+            getConsole.classList.add("success")
+            getConsole.classList.remove("mention")
+            async function generateCode() {
+                fetch('https://mouse-api-dev-pqse.3.us-1.fl0.io/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json', }, }
+                ).then((res) => res.json())
+                    .then((data) => { return getConsole.innerHTML = `APIKEY have been generated: "${data.key}"` })
+            }
+        }, 5000);
+    }
+
 </script>
 
 <style>
@@ -61,6 +81,77 @@
         transition: all;
         transition-duration: 0.5s;
     }
+
+    .modal-header .btn-close {
+        --bs-btn-close-color: white;
+    }
+
+    .btn-close:hover {
+        --bs-btn-close-color: white;
+    }
+
+    .modal {
+        --bs-modal-bg: #2b2b2b;
+        color: white;
+    }
+
+    code {
+        background-color: rgb(75, 75, 75);
+        padding: 0.2em;
+        border-radius: 3px;
+    }
+
+    .coder {
+        display: block;
+    }
+
+    .shaky:hover {
+        animation: shake 0.3s;
+        cursor: pointer;
+    }
+
+    .danger {
+        color: rgb(245, 155, 155)
+    }
+
+    .mention {
+        color: #71dbe2;
+    }
+
+    .success {
+        color: rgb(96, 224, 96)
+    }
+
+    @keyframes shake {
+        0% {
+            transform: translateY(0);
+            transform: translateX(0);
+        }
+
+        10% {
+            transform: translateY(4px);
+            transform: translateX(7px);
+        }
+
+        15% {
+            transform: translateX(3px);
+            transform: translateY(0);
+        }
+
+        25% {
+            transform: translateY(-8px);
+            transform: translateX(-4px);
+        }
+
+        50% {
+            transform: translateY(6px);
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(0px);
+        }
+    }
 </style>
 
 
@@ -73,10 +164,43 @@
                 <p>The <code>* *</code> are Required values | <code>[ ]</code> are optional values</p>
                 <div class="container d-grid gap-2 d-md-block">
                     <a class="btn btn-success" href="/api/mice/test" type="button">Try the API 🐁</a>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Generate KEY 🔑</button>
                     <a class="btn btn-secondary" href="https://github.com/Cd-corgi" type="button">Github 🐱</a>
                 </div>
             </div>
         </div>
+        <!-- Inicio modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header" data-bs-theme="dark">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Generate an API KEY</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <h2><strong>Warning!</strong></h2>
+                            <p>You are about to generate a key that make you get access to the API features! Remember,
+                                is for Personal Use Only. For more information you can contact Corgi with Discord as
+                                <code class="mention">corgi_official1</code>.
+                            </p>
+                            <hr>
+                            <p><code
+                                    class="danger coder">You are about to get a valid API KEY, the page won't remember the same code if you refresh the page.<br><br>Press "Generate Key" if you want to generate one anyway.</code>
+                            </p>
+                        </div>
+                        <div class="mb-3" id="output" style="transition: ease 0.5s;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" id="getKey" onclick="getKey()">Generate
+                            Key</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Final modal -->
         <br>
     </div>
     <div class="container">
@@ -151,7 +275,8 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" , type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                        data-bs-target="#collapseThree" aria-expanded="true"
+                                        aria-controls="collapseThree">
                                         Try coin-flipper!
                                     </button>
                                 </h2>
@@ -170,7 +295,10 @@
         </div>
     </div>
     <br>
-    <p class="text-center">Made with ♥ and 🐁 by Corgi</p>
+    <div class="container text-center justify-content-center d-grid gap-2 d-md-flex">
+        <p>Made with ♥ and 🐁 by</p>
+        <p class="shaky">Corgi</p>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>

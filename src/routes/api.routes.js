@@ -3,7 +3,7 @@ const router2 = express.Router();
 const getK = require('../models/keys')
 const data = require('../config/data.json')
 const fs = require('fs')
-const { validateAPIKEY, generateColorCode } = require('../utils/functions');
+const { validateAPIKEY, generateColorCode, GenerateAPI } = require('../utils/functions');
 
 const example = data;
 
@@ -12,6 +12,18 @@ router2.use((req, res, next) => {
 });
 
 router2.get("/api", async (req, res) => res.redirect("/"))
+
+router2.post("/api/register", async (req, res) => {
+    try {
+        var getApiK = GenerateAPI()
+        new getK({
+            api: getApiK
+        }).save()
+        res.status(200).send({ status: "success", key: getApiK })
+    } catch (error) {
+        res.status(400).send({ status: `Bad Request`, key: null, Errmesage: error })
+    }
+})
 
 //#region Mice
 router2.get("/api/mice", async (req, res) => {
